@@ -1,24 +1,32 @@
 #include "../includes/push_swap.h"
 
-// Function to perform 'ra' operation (rotate A)
-void ra(int *stack, int top) {
-    if (top > 0) {
-        int temp = stack[0];
-        for (int i = 0; i < top; i++) {
-            stack[i] = stack[i + 1];
-        }
-        stack[top] = temp;
-    }
+void rotate(Stack *stack) {
+    if (stack == NULL || stack->head == NULL || stack->head->next == NULL)
+        return;
+    
+    
+    Node *first = stack->head;
+    Node *second = first->next;
+
+    stack->head = second;
+    Node *temp = second;
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = first;
+    first->next = NULL;
 }
 
-// Function to perform 'rb' operation (rotate B)
-void rb(int *stack, int top) {
-    ra(stack, top);
+void ra(Stack *stack_a) {
+    rotate(stack_a);
 }
 
-// Function to perform 'rr' operation (rotate A and B)
-void rr(int *stackA, int topA, int *stackB, int topB) {
-    ra(stackA, topA);
-    rb(stackB, topB);
+void rb(Stack *stack_b) {
+    rotate(stack_b);
+}
+
+void rr(Stack *stack_a, Stack *stack_b) {
+    ra(stack_a);
+    rb(stack_b);
 }
 

@@ -6,9 +6,10 @@ LFLAGS = -Llibft -lft -Lft_printf -lftprintf
 
 SRCS = srcs/main.c \
        srcs/utils.c \
-       srcs/operations.c \
-       srcs/sort.c \
-       srcs/sort_utils.c \
+       srcs/swap.c \
+       srcs/push.c \
+       srcs/rotate.c \
+       srcs/reverse_rotate.c \
 
 OBJS = $(SRCS:.c=.o)
 

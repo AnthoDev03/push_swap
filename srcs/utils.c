@@ -1,26 +1,27 @@
 #include "../includes/push_swap.h"
 
-void push(Stack *stack, int value) {
+void push(Stack *stack, int data)
+{
     Node *new_node = (Node *)malloc(sizeof(Node));
-    new_node->value = value;
+    if (new_node == NULL)
+        return;
+
+    new_node->data = data;
     new_node->next = stack->head;
     stack->head = new_node;
 }
 
-int pop(Stack *stack) {
-    if (stack->head == NULL) {
-        return -1;
-    }
+int pop(Stack *stack)
+{
+    if (stack->head == NULL)
+        return (0);
 
-    int value = stack->head->value;
     Node *temp = stack->head;
+    int data = temp->data;
     stack->head = stack->head->next;
     free(temp);
-    return value;
+
+    return data;
 }
 
-Stack *create_stack() {
-    Stack *stack = (Stack *)malloc(sizeof(Stack));
-    stack->head = NULL;
-    return stack;
-}
+
