@@ -1,6 +1,8 @@
 #include "../includes/push_swap.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
+#include <stdbool.h>
 
 void print_stack(Stack *stack) {
     if (stack == NULL) {
@@ -41,25 +43,89 @@ void    stack_a_init(int argc, char **argv, Stack *stack_a)
     }
 }
 
-int     test(int argc, char **argv)
-{
-    int     i;
-    int     j;
+bool is_integer(const char *str) {
+    if (*str == '-' || *str == '+') {
+        str++;
+    }
 
-    i = 1;
-    j = 0;
+    while (*str) {
+        if (*str < '0' || *str > '9') {
+            return false;
+        }
+        str++;
+    }
 
-    while (i < argc)
-    {  
-        while(argv[i][j])
-        {
-            if (argv[i][j] < '0' || argv[i][j] > '9')
-                return (1);
+    return true;
+}
+
+bool has_duplicates(int argc, char **argv) {
+    int i = 1;
+    while (i < argc) {
+        int j = i + 1;
+        while (j < argc) {
+            int max_length;
+            if (ft_strlen(argv[i]) > ft_strlen(argv[j])) {
+                max_length = ft_strlen(argv[i]);
+            } else {
+                max_length = ft_strlen(argv[j]);
+            }
+
+            if (ft_strncmp(argv[i], argv[j], max_length) == 0) {
+                return true;
+            }
             j++;
         }
         i++;
     }
-    return (0);
+
+    return false;
+}
+
+long long str_to_ll(const char *str) {
+    long long number = 0;
+    int sign = 1;
+
+    if (*str == '-') {
+        sign = -1;
+        str++;
+    } else if (*str == '+') {
+        str++;
+    }
+
+    while (*str) {
+        number = number * 10 + (*str - '0');
+        str++;
+    }
+
+    return number * sign;
+}
+
+int test(int argc, char **argv) {
+    if (has_duplicates(argc, argv)) {
+        return 0;
+    }
+
+    int i = 1;
+    while (i < argc) {
+        if (!is_integer(argv[i])) {
+            return 0;
+        }
+
+        long long number = str_to_ll(argv[i]);
+
+        if (number > INT_MAX || number < INT_MIN) {
+            return 0;
+        }
+        i++;
+    }
+
+    return 1;
+
+}
+
+void sort_case_3(Stack *stack_a, Stack *stack_b)
+{
+
 }
 
 
@@ -70,7 +136,7 @@ int main(int argc, char **argv) {
     stack_a = stack_init();
     stack_b = stack_init();
 
-    if (test(argc, argv) == 1)
+    if (test(argc, argv) == 0)
     {
         printf("ERROR FDP");
         exit(EXIT_FAILURE);
@@ -83,9 +149,6 @@ int main(int argc, char **argv) {
     pa(stack_a, stack_b);
     print_stack(stack_a);
     print_stack(stack_b);
-
-
-
 
     return 0;
 }
