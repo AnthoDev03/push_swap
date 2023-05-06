@@ -8,15 +8,18 @@ void sa(Stack *stack) {
         first->next = second->next;
         second->next = first;
         stack->head = second;
+        write(1, "sa\n", 3);
     }
 }
 
 
 void sb(Stack *stack) {
     sa(stack);
+    write(1, "sb\n", 3);
 }
 
 void ss(Stack *stack_a, Stack *stack_b) {
     sa(stack_a);
     sb(stack_b);
+    write(1, "ss\n", 3);
 }

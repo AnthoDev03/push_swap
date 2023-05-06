@@ -19,14 +19,17 @@ void rotate(Stack *stack) {
 
 void ra(Stack *stack_a) {
     rotate(stack_a);
+    write(1, "ra\n", 3);
 }
 
 void rb(Stack *stack_b) {
     rotate(stack_b);
+    write(1, "rb\n", 3);
 }
 
 void rr(Stack *stack_a, Stack *stack_b) {
     ra(stack_a);
     rb(stack_b);
+    write(1, "rr\n", 2);
 }
 
