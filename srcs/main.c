@@ -20,7 +20,9 @@ void print_stack(Stack *stack) {
 }
 
 Stack *stack_init() {
-    Stack *stack = (Stack *) malloc(sizeof(Stack));
+    Stack *stack;
+
+    stack = (Stack *) malloc(sizeof(Stack));
     if (stack == NULL)
         return (NULL);
 
@@ -47,23 +49,24 @@ bool is_integer(const char *str) {
     if (*str == '-' || *str == '+') {
         str++;
     }
-
     while (*str) {
         if (*str < '0' || *str > '9') {
-            return false;
+            return (false);
         }
         str++;
     }
-
-    return true;
+    return (true);
 }
 
 bool has_duplicates(int argc, char **argv) {
-    int i = 1;
+    int i;
+    int j;
+    int max_length;
+
+    i = 1;
     while (i < argc) {
-        int j = i + 1;
+        j = i + 1;
         while (j < argc) {
-            int max_length;
             if (ft_strlen(argv[i]) > ft_strlen(argv[j])) {
                 max_length = ft_strlen(argv[i]);
             } else {
@@ -77,13 +80,15 @@ bool has_duplicates(int argc, char **argv) {
         }
         i++;
     }
-
     return false;
 }
 
 long long str_to_ll(const char *str) {
-    long long number = 0;
-    int sign = 1;
+    long long number;
+    int sign;
+
+    number = 0;
+    sign = 1;
 
     if (*str == '-') {
         sign = -1;
@@ -105,27 +110,24 @@ int test(int argc, char **argv) {
         return 0;
     }
 
-    int i = 1;
+    int     i; 
+
+    i = 1;
     while (i < argc) {
         if (!is_integer(argv[i])) {
             return 0;
         }
 
-        long long number = str_to_ll(argv[i]);
+        long long   number;
+
+        number = str_to_ll(argv[i]);
 
         if (number > INT_MAX || number < INT_MIN) {
             return 0;
         }
         i++;
     }
-
     return 1;
-
-}
-
-void sort_case_3(Stack *stack_a, Stack *stack_b)
-{
-
 }
 
 
