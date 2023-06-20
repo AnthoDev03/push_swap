@@ -10,6 +10,7 @@ SRCS = srcs/main.c \
        srcs/push.c \
        srcs/rotate.c \
        srcs/reverse_rotate.c \
+       srcs/parse.c
 
 OBJS = $(SRCS:.c=.o)
 

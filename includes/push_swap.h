@@ -3,6 +3,10 @@
 
 # include "libft.h"
 # include "ft_printf.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <limits.h>
+# include <stdbool.h>
 
 typedef struct Node {
     int data;

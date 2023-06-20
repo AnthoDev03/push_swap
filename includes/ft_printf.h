@@ -17,7 +17,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdint.h>
-
+# include <stdbool.h>
 int		ft_printf(const char *format, ...);
 int		ft_printnbr(int n);
 int		ft_printpercent(void);
@@ -32,5 +32,8 @@ int		ft_hex_len(unsigned	int num);
 void	ft_put_hex(unsigned int num, const char format);
 int		ft_print_ptr(unsigned long long ptr);
 int		ft_print_hex(unsigned int num, const char format);
-
+int		test(int argc, char **argv);
+long long str_to_ll(const char *str);
+bool has_duplicates(int argc, char **argv);
+bool is_integer(const char *str);
 #endif
