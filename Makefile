@@ -47,12 +47,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-
-# Utilisation du makefile de libft
-$(LIBFT):
-	make -C libft/
-
-# Utilisation du makefile de ft_printf
-$(FT_PRINTF):
-	make -C ft_printf/
-

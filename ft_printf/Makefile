@@ -8,28 +8,25 @@ FT_PRINTF_SRCS = ft_printf.c \
 		 ft_printf_hex.c \
 		 ft_printf_lib.c \
 		 ft_printf_ptr.c \
-		 ft_printf_unsigned.c \
-
-
-LIBFT_SRCS = ../libft/*.c
+		 ft_printf_unsigned.c
 
 FT_PRINTF_OBJS = $(FT_PRINTF_SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(FT_PRINTF_OBJS) $(LIBFT)
-	ar rcs $(NAME) $(FT_PRINTF_OBJS) $(LIBFT)
-
-$(LIBFT):
-	$(MAKE) -C ../libft/
+$(NAME): $(FT_PRINTF_OBJS)
+	make -C ../libft
+	$(CC) $(CFLAGS) -c $(FT_PRINTF_SRCS)
+	ar rcs $(NAME) $(FT_PRINTF_OBJS)
+	ar rcs $(NAME) ../libft/*.o
 
 clean:
 	$(RM) $(FT_PRINTF_OBJS)
-	$(MAKE) -C ../libft/ clean
+	make -C ../libft clean
 
 fclean: clean
 	$(RM) $(NAME)
-	$(MAKE) -C ../libft/ fclean
+	make -C ../libft fclean
 
 re: fclean all
 
