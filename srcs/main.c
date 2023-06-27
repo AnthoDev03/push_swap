@@ -40,6 +40,44 @@ void    stack_a_init(int argc, char **argv, Stack *stack_a)
         i--;
     }
 }
+void pushTwoSmallest(Stack *stack_a, Stack *stack_b) {
+    if (stack_a->head == NULL) {
+        printf("La pile stack_a est vide.\n");
+        return;
+    }
+
+    // Recherche des deux plus petits éléments
+    int smallest1 = INT_MAX;  // Plus petit élément
+    int smallest2 = INT_MAX;  // Deuxième plus petit élément
+
+    Node *current = stack_a->head;
+    while (current != NULL) {
+        int data = current->data;
+        if (data < smallest1) {
+            smallest2 = smallest1;
+            smallest1 = data;
+        } else if (data < smallest2 && data != smallest1) {
+            smallest2 = data;
+        }
+        current = current->next;
+    }
+
+    // Déplacement des deux plus petits éléments vers stack_b
+    int count = 0;
+    current = stack_a->head;
+    while (current != NULL && count < 2) {
+        Node *nextNode = current->next;
+        if (current->data == smallest1 || current->data == smallest2) {
+            pb(stack_a, stack_b);
+            count++;
+        } else {
+            ra(stack_a);
+        }
+        current = nextNode;
+    }
+}
+
+
 
 void sort_3_elements(Stack *stack_a) {
 
@@ -73,12 +111,12 @@ void sort_3_elements(Stack *stack_a) {
 
 void sort_5_elements(Stack *stack_a, Stack *stack_b) {
 
+    pushTwoSmallest(stack_a, stack_b);
     sort_3_elements(stack_a);
-    if (stack_b->head->data > stack_b->head->next->data)
+    if (stack_b->head->data < stack_b->head->next->data)
         sb(stack_b);
-
-    pa(stack_b, stack_a);
-    pa(stack_b, stack_a);
+    pa(stack_a, stack_b);
+    pa(stack_a, stack_b);
 }
 
 int main(int argc, char **argv) {
