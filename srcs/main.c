@@ -41,14 +41,9 @@ void    stack_a_init(int argc, char **argv, Stack *stack_a)
     }
 }
 void pushTwoSmallest(Stack *stack_a, Stack *stack_b) {
-    if (stack_a->head == NULL) {
-        printf("La pile stack_a est vide.\n");
-        return;
-    }
 
-    // Recherche des deux plus petits éléments
-    int smallest1 = INT_MAX;  // Plus petit élément
-    int smallest2 = INT_MAX;  // Deuxième plus petit élément
+    int smallest1 = INT_MAX;  
+    int smallest2 = INT_MAX; 
 
     Node *current = stack_a->head;
     while (current != NULL) {
@@ -62,7 +57,6 @@ void pushTwoSmallest(Stack *stack_a, Stack *stack_b) {
         current = current->next;
     }
 
-    // Déplacement des deux plus petits éléments vers stack_b
     int count = 0;
     current = stack_a->head;
     while (current != NULL && count < 2) {
