@@ -27,16 +27,13 @@ Stack *stack_init() {
     return stack;
 }
 
-void    stack_a_init(int argc, char **argv, Stack *stack_a)
+void    stack_a_init(int *data, Stack *stack_a, int argc)
 {
     int     i;
-    int     data;
-
     i = argc - 1;
-    while (i > 0)
+    while (i >= 0)
     {
-        data = ft_atoi(argv[i]);
-        push(stack_a, data);
+        push(stack_a, data[i]);
         i--;
     }
 }
@@ -69,6 +66,43 @@ void pushTwoSmallest(Stack *stack_a, Stack *stack_b) {
         }
         current = nextNode;
     }
+}
+
+int *transform(int argc, char **argv)
+{
+	int idx;
+	int *data;
+	int newdata;
+	int number;
+
+	idx= 1;
+	newdata = 0;
+	number = 0;
+	data = (int *)malloc(sizeof(int) * (argc - 1));
+	if (!data)
+		return NULL;
+	while (idx < argc)
+	{
+		data[idx] = ft_atoi(argv[idx]);
+		idx++;
+	}
+	idx = 0;
+	while ((argc - 1) >= 0)
+	{
+		while (data[idx])
+		{
+			if(data[number] > data[idx])
+				newdata++;
+			idx++;
+		}
+		data[idx] = newdata;
+		newdata = 0;
+		number++;
+		idx = 0;
+		argc--;
+	}
+	return (data);
+
 }
 
 
@@ -126,7 +160,7 @@ int main(int argc, char **argv) {
         exit(EXIT_FAILURE);
     }
 
-    stack_a_init(argc, argv, stack_a);
+    stack_a_init(transform(argc, argv), stack_a, argc);
     print_stack(stack_a);
     print_stack(stack_b);
 
