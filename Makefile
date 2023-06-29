@@ -1,7 +1,7 @@
 NAME = push_swap
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 LFLAGS = -Llibft -lft -Lft_printf -lftprintf
 
 SRCS = srcs/main.c \

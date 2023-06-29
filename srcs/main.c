@@ -31,7 +31,7 @@ void    stack_a_init(int *data, Stack *stack_a, int argc)
 {
     int     i;
     i = argc - 1;
-    while (i >= 0)
+    while (i > 0)
     {
         push(stack_a, data[i]);
         i--;
@@ -81,15 +81,15 @@ int *transform(int argc, char **argv)
 	data = (int *)malloc(sizeof(int) * (argc - 1));
 	if (!data)
 		return NULL;
-	while (idx < argc)
+	while (idx < (argc - 1))
 	{
-		data[idx] = ft_atoi(argv[idx]);
+		data[idx - 1] = ft_atoi(argv[idx]);
 		idx++;
 	}
 	idx = 0;
 	while ((argc - 1) >= 0)
 	{
-		while (data[idx])
+		while (idx < argc)
 		{
 			if(data[number] > data[idx])
 				newdata++;
