@@ -30,8 +30,8 @@ Stack *stack_init() {
 void    stack_a_init(int *data, Stack *stack_a, int argc)
 {
     int     i;
-    i = argc - 1;
-    while (i > 0)
+    i = argc -2;
+    while (i >= 0)
     {
         push(stack_a, data[i]);
         i--;
@@ -48,8 +48,6 @@ void pushTwoSmallest(Stack *stack_a, Stack *stack_b) {
         if (data < smallest1) {
             smallest2 = smallest1;
             smallest1 = data;
-        } else if (data < smallest2 && data != smallest1) {
-            smallest2 = data;
         }
         current = current->next;
     }
@@ -70,42 +68,44 @@ void pushTwoSmallest(Stack *stack_a, Stack *stack_b) {
 
 int *transform(int argc, char **argv)
 {
-	int idx;
-	int *data;
-	int newdata;
-	int number;
+    int idx;
+    int *data;
+    int *data2;
 
-	idx= 1;
-	newdata = 0;
-	number = 0;
-	data = (int *)malloc(sizeof(int) * (argc - 1));
-	if (!data)
-		return NULL;
-	while (idx < (argc - 1))
-	{
-		data[idx - 1] = ft_atoi(argv[idx]);
-		idx++;
-	}
-	idx = 0;
-	while ((argc - 1) >= 0)
-	{
-		while (idx < argc)
-		{
-			if(data[number] > data[idx])
-				newdata++;
-			idx++;
-		}
-		data[idx] = newdata;
-		newdata = 0;
-		number++;
-		idx = 0;
-		argc--;
-	}
-	return (data);
+    idx = 1;
+    data = (int *)malloc(sizeof(int) * (argc - 1));
+    if (!data)
+        return NULL;
+    data2 = (int *)malloc(sizeof(int) * (argc - 1));
+    if (!data2)
+        return NULL;
 
+
+    while (idx < (argc))
+    {
+        data[idx - 1] = ft_atoi(argv[idx]);
+        idx++;
+    }
+    int idx2 = 0;
+    int newdata =0;
+    int number = 0;
+    idx = 0;
+    while (idx2 < argc) {
+        while (idx < argc - 1) {
+            if (data[number] > data[idx]) {
+                newdata++;
+            }
+            idx++;
+        }
+        data2[number] = newdata;
+        newdata = 0;
+        number++;
+        idx2++;
+        idx= 0;
+
+    }
+    return (data2);
 }
-
-
 
 void sort_3_elements(Stack *stack_a) {
 
@@ -113,25 +113,20 @@ void sort_3_elements(Stack *stack_a) {
     int second = stack_a->head->next->data;
     int third = stack_a->head->next->next->data;
 
-    // Cas 1: première permutation (2 1 3)
     if (first > second && second < third && first < third) {
         sa(stack_a);
     }
-    // Cas 2: deuxième permutation (3 2 1)
     else if (first > second && third < second && first > third) {
         sa(stack_a);
         rra(stack_a);
     }
-    // Cas 3: troisième permutation (3 1 2)
     else if (second < first && first > third && second < third) {
         ra(stack_a);
     }
-    // Cas 4: quatrième permutation (1 3 2)
     else if (second > third && third > first && second > first) {
         sa(stack_a);
         ra(stack_a);
     }
-    // Cas 5: cinquième permutation (2 3 1)
     else if (third < first && first < second && second > third) {
         rra(stack_a);
     }
