@@ -1,4 +1,5 @@
 #include "../includes/push_swap.h"
+#include <stdlib.h>
 
 void print_stack(Stack *stack) {
     if (stack == NULL) {
@@ -48,6 +49,8 @@ void pushTwoSmallest(Stack *stack_a, Stack *stack_b) {
         if (data < smallest1) {
             smallest2 = smallest1;
             smallest1 = data;
+        } else if (data < smallest2 && data != smallest1) {
+            smallest2 = data;
         }
         current = current->next;
     }
@@ -64,6 +67,43 @@ void pushTwoSmallest(Stack *stack_a, Stack *stack_b) {
         }
         current = nextNode;
     }
+}
+int* decimalToBinary(int* decimalArray, int size) {
+    int* binaryArray = (int*)malloc(size * sizeof(int));
+
+    for (int i = 0; i < size; i++) {
+        int decimalNum = decimalArray[i];
+        int binaryNum = 0;
+        int base = 1;
+
+        while (decimalNum > 0) {
+            int remainder = decimalNum % 2;
+            binaryNum += remainder * base;
+            decimalNum /= 2;
+            base *= 10;
+        }
+
+        binaryArray[i] = binaryNum;
+    }
+
+    return binaryArray;
+}
+bool issorted(Stack *stack_a)
+{
+     Node *current = stack_a->head;
+    int data;
+    int data2;
+    data = current->data;
+    data2 = current->next->data;
+    while (current != NULL) {
+        if (data < data2) {
+            return false;
+        }
+        data = current->data;
+        data2 = current->next->data;
+        current = current->next;
+    }
+    return true;
 }
 
 int *transform(int argc, char **argv)
@@ -104,8 +144,10 @@ int *transform(int argc, char **argv)
         idx= 0;
 
     }
-    return (data2);
+
+    return (decimalToBinary(data2, argc -1));
 }
+
 
 void sort_3_elements(Stack *stack_a) {
 
@@ -151,21 +193,18 @@ int main(int argc, char **argv) {
 
     if (test(argc, argv) == 0)
     {
-        ft_printf("ERROR FDP");
+        ft_printf("ERROR");
         exit(EXIT_FAILURE);
     }
-
     stack_a_init(transform(argc, argv), stack_a, argc);
-    print_stack(stack_a);
-    print_stack(stack_b);
-
+    if (issorted(stack_a) == true) {
+        exit(EXIT_SUCCESS);
+    }
+ //   print_stack(stack_a);
     if (argc == 4)
         sort_3_elements(stack_a);
     if (argc == 6)
         sort_5_elements(stack_a, stack_b);
-
-    print_stack(stack_a);
-    print_stack(stack_b);
-
-    return 0;
+ //print_stack(stack_a);
+     return 0;
 }
