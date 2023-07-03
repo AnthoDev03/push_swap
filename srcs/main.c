@@ -19,7 +19,7 @@ void print_stack(Stack *stack) {
 Stack *stack_init() {
     Stack *stack;
 
-    stack = (Stack *) malloc(sizeof(Stack));
+    stack = (Stack *)malloc(sizeof(Stack));
     if (stack == NULL)
         return (NULL);
 
@@ -40,12 +40,18 @@ void    stack_a_init(int *data, Stack *stack_a, int argc)
 }
 void pushTwoSmallest(Stack *stack_a, Stack *stack_b) {
 
-    int smallest1 = INT_MAX;  
-    int smallest2 = INT_MAX; 
+    int smallest1; 
+    int smallest2;
+    int data;
+    int count;
+    Node *nextNode;
+    Node *current; 
 
-    Node *current = stack_a->head;
+    smallest1 = INT_MAX; 
+    smallest2 = INT_MAX; 
+    current = stack_a->head;
     while (current != NULL) {
-        int data = current->data;
+        data = current->data;
         if (data < smallest1) {
             smallest2 = smallest1;
             smallest1 = data;
@@ -55,10 +61,10 @@ void pushTwoSmallest(Stack *stack_a, Stack *stack_b) {
         current = current->next;
     }
 
-    int count = 0;
+    count = 0;
     current = stack_a->head;
     while (current != NULL && count < 2) {
-        Node *nextNode = current->next;
+        nextNode = current->next;
         if (current->data == smallest1 || current->data == smallest2) {
             pb(stack_a, stack_b);
             count++;
@@ -68,93 +74,123 @@ void pushTwoSmallest(Stack *stack_a, Stack *stack_b) {
         current = nextNode;
     }
 }
-int* decimalToBinary(int* decimalArray, int size) {
-    int* binaryArray = (int*)malloc(size * sizeof(int));
+void convertDecimalToBinary(int *decimalArray, int *binaryArray, int size)
+{
+    int i = 0;
 
-    for (int i = 0; i < size; i++) {
+    while (i < size)
+    {
         int decimalNum = decimalArray[i];
         int binaryNum = 0;
         int base = 1;
+        int remainder;
 
-        while (decimalNum > 0) {
-            int remainder = decimalNum % 2;
+        while (decimalNum > 0)
+        {
+            remainder = decimalNum % 2;
             binaryNum += remainder * base;
             decimalNum /= 2;
             base *= 10;
         }
 
         binaryArray[i] = binaryNum;
+        i++;
     }
+}
+int *decimalToBinary(int *decimalArray, int size)
+{
+    int *binaryArray;
+
+    binaryArray = (int *)malloc(size * sizeof(int));
+    if (!binaryArray)
+        return NULL;
+
+    convertDecimalToBinary(decimalArray, binaryArray, size);
 
     return binaryArray;
 }
-bool issorted(Stack *stack_a)
-{
-     Node *current = stack_a->head;
-    int data;
-    int data2;
-    data = current->data;
-    data2 = current->next->data;
-    while (current != NULL) {
-        if (data < data2) {
+
+bool issorted(Stack *stack_a) {
+
+    Node *current;
+    current = stack_a->head;
+    while (current->next != NULL) {
+        if (current->data > current->next->data) {
             return false;
         }
-        data = current->data;
-        data2 = current->next->data;
         current = current->next;
     }
-    return true;
+
+    return (true);
 }
 
-int *transform(int argc, char **argv)
+void calculateNewDataArray(int *data, int *data2, int size)
 {
-    int idx;
-    int *data;
-    int *data2;
+    int idx2 = 0;
 
-    idx = 1;
-    data = (int *)malloc(sizeof(int) * (argc - 1));
-    if (!data)
-        return NULL;
-    data2 = (int *)malloc(sizeof(int) * (argc - 1));
-    if (!data2)
-        return NULL;
+    while (idx2 < size)
+    {
+        int idx = 0;
+        int newdata = 0;
 
+        while (idx < size)
+        {
+            if (data[idx2] > data[idx])
+                newdata++;
+            idx++;
+        }
 
-    while (idx < (argc))
+        data2[idx2] = newdata;
+        idx2++;
+    }
+}
+
+void fillDataArray(int argc, char **argv, int *data)
+{
+    int idx = 1;
+
+    while (idx < argc)
     {
         data[idx - 1] = ft_atoi(argv[idx]);
         idx++;
     }
-    int idx2 = 0;
-    int newdata =0;
-    int number = 0;
-    idx = 0;
-    while (idx2 < argc) {
-        while (idx < argc - 1) {
-            if (data[number] > data[idx]) {
-                newdata++;
-            }
-            idx++;
-        }
-        data2[number] = newdata;
-        newdata = 0;
-        number++;
-        idx2++;
-        idx= 0;
+}
 
+int *transform(int argc, char **argv)
+{
+    int *data;
+    int *data2;
+
+    data = (int *)malloc(sizeof(int) * (argc - 1));
+    if (!data)
+        return NULL;
+
+    data2 = (int *)malloc(sizeof(int) * (argc - 1));
+    if (!data2)
+    {
+        free(data);
+        return NULL;
     }
 
-    return (decimalToBinary(data2, argc -1));
+    fillDataArray(argc, argv, data);
+    calculateNewDataArray(data, data2, argc - 1);
+
+    free(data);
+
+    return (decimalToBinary(data2, argc - 1));
 }
+
 
 
 void sort_3_elements(Stack *stack_a) {
 
-    int first = stack_a->head->data;
-    int second = stack_a->head->next->data;
-    int third = stack_a->head->next->next->data;
+    int first;
+    int second;
+    int third;
 
+    first = stack_a->head->data;
+    second = stack_a->head->next->data;
+    third = stack_a->head->next->next->data;
     if (first > second && second < third && first < third) {
         sa(stack_a);
     }
@@ -200,11 +236,11 @@ int main(int argc, char **argv) {
     if (issorted(stack_a) == true) {
         exit(EXIT_SUCCESS);
     }
- //   print_stack(stack_a);
+    print_stack(stack_a);
     if (argc == 4)
         sort_3_elements(stack_a);
     if (argc == 6)
         sort_5_elements(stack_a, stack_b);
- //print_stack(stack_a);
-     return 0;
+ print_stack(stack_a);
+     return (0);
 }
