@@ -20,15 +20,16 @@ typedef struct Stack {
 
 void push(Stack *stack, int data);
 int pop(Stack *stack);
-
+int         ft_lstsize2(Stack *stack);
 void pa(Stack *stack_a, Stack *stack_b);
 void pb(Stack *stack_a, Stack *stack_b);
-
+int get_max_bits(Stack *stack);
+void radix_sort(Stack *stack_a, Stack *stack_b);
 void rotate(Stack *stack);
 void ra(Stack *stack_a);
 void rb(Stack *stack_b);
 void rr(Stack *stack_a, Stack *stack_b);
-
+bool issorted(Stack *stack_a);
 void reverse_rotate(Stack *stack);
 void rra(Stack *stack_a);
 void rrb(Stack *stack_b);
@@ -39,5 +40,12 @@ void sa(Stack *stack);
 void sb(Stack *stack);
 void ss(Stack *stack_A, Stack *stack_B);
 Stack *stack_init();
+
+int *transform(int argc, char **argv);
+void fillDataArray(int argc, char **argv, int *data);
+void calculateNewDataArray(int *data, int *data2, int size);
+void pushTwoSmallest(Stack *stack_a, Stack *stack_b);
+void findTwoSmallest(Stack *stack_a, int *smallest1, int *smallest2);
+void performPushes(Stack *stack_a, Stack *stack_b, int smallest1, int smallest2);
 
 #endif

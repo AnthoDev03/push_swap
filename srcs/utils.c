@@ -24,4 +24,32 @@ int pop(Stack *stack)
     return data;
 }
 
+int         ft_lstsize2(Stack *stack)
+{
+    int         count;
+    Node *current;
+
+    current = stack->head;
+    count = 0;
+    while (current != NULL) 
+    {
+        count++;
+        current = current->next;
+    }
+    
+    return count;
+}
+bool issorted(Stack *stack_a) {
+
+    Node *current;
+    current = stack_a->head;
+    while (current->next != NULL) {
+        if (current->data > current->next->data) {
+            return false;
+        }
+        current = current->next;
+    }
+
+    return (true);
+}
 
