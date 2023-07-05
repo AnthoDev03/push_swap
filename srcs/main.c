@@ -88,42 +88,6 @@ void pushTwoSmallest(Stack *stack_a, Stack *stack_b)
     performPushes(stack_a, stack_b, smallest1, smallest2);
 }
 
-void convertDecimalToBinary(int *decimalArray, int *binaryArray, int size)
-{
-    int i = 0;
-
-    while (i < size)
-    {
-        int decimalNum = decimalArray[i];
-        int binaryNum = 0;
-        int base = 1;
-        int remainder;
-
-        while (decimalNum > 0)
-        {
-            remainder = decimalNum % 2;
-            binaryNum += remainder * base;
-            decimalNum /= 2;
-            base *= 10;
-        }
-
-        binaryArray[i] = binaryNum;
-        i++;
-    }
-}
-int *decimalToBinary(int *decimalArray, int size)
-{
-    int *binaryArray;
-
-    binaryArray = (int *)malloc(size * sizeof(int));
-    if (!binaryArray)
-        return NULL;
-
-    convertDecimalToBinary(decimalArray, binaryArray, size);
-
-    return binaryArray;
-}
-
 bool issorted(Stack *stack_a) {
 
     Node *current;
@@ -191,7 +155,6 @@ int *transform(int argc, char **argv)
 
     free(data);
 
-   // return (decimalToBinary(data2, argc - 1));
     return data2;
 }
 
@@ -234,11 +197,14 @@ void sort_5_elements(Stack *stack_a, Stack *stack_b) {
     pa(stack_a, stack_b);
     pa(stack_a, stack_b);
 }
-int ft_lstsize2(Stack *stack)
+
+int         ft_lstsize2(Stack *stack)
 {
-    int count = 0;
-    Node *current = stack->head;
-    
+    int         count;
+    Node *current;
+
+    current = stack->head;
+    count = 0;
     while (current != NULL) 
     {
         count++;
@@ -253,25 +219,14 @@ Node *get_next_min(Stack *stack)
 	Node *current = stack->head;
 	Node *min = NULL;
 
-	// Parcourir tous les noeuds de la pile
 	while (current != NULL)
 	{
-		// Si l'indice est -1 et que soit aucun min n'a encore été trouvé
-		// soit la valeur du noeud courant est plus petite que le min actuel
 		if (current->index == -1 && (min == NULL || current->data < min->data))
-		{
-			// Mettre à jour min
 			min = current;
-		}
-		// Passer au noeud suivant
 		current = current->next;
 	}
-	// Si un min a été trouvé, mettre à jour son index
 	if (min != NULL)
-	{
-		min->index = 0;  // Ou une autre valeur qui signifie que ce noeud a déjà été traité
-	}
-	// Retourner min (peut être NULL si aucun noeud avec index == -1 n'a été trouvé)
+		min->index = 0;
 	return min;
 }
 void index_stack(Stack *stack)
@@ -279,46 +234,22 @@ void index_stack(Stack *stack)
 	Node *current;
 	int index = 0;
 
-	// Résoudre le problème en réinitialisant l'indice de tous les noeuds à -1
 	current = stack->head;
 	while (current != NULL)
 	{
 		current->index = -1;
 		current = current->next;
 	}
-
-	// Maintenant, pour chaque valeur minimale non marquée, lui attribuer un indice unique
 	current = stack->head;
 	while (current != NULL)
 	{
 		Node *min = get_next_min(stack);
 		if (min != NULL)
-		{
 			min->index = index++;
-		}
 		current = current->next;
 	}
 }
 
-/*int get_max_bits(Stack *stack)
-{
-	Node	*head;
-	int		max;
-	int		max_bits;
-
-	head = stack->head;
-	max = head->index;
-	max_bits = 0;
-	while (head)
-	{
-		if (head->index > max)
-			max = head->index;
-		head = head->next;
-	}
-	while ((max >> max_bits) != 0)
-		max_bits++;
-	return (max_bits);
-}*/
 static int get_max_bits(Stack *stack)
 {
     Node *head = stack->head;
@@ -347,7 +278,7 @@ void radix_sort(Stack *stack_a, Stack *stack_b)
 
 	i = 0;
 	head_a = stack_a->head;
-	size = ft_lstsize2(stack_a); // Note: Vous devez adapter cette fonction à votre nouvelle structure de données.
+	size = ft_lstsize2(stack_a);
 	max_bits = get_max_bits(stack_a);
 	while (i < max_bits)
 	{
@@ -356,12 +287,12 @@ void radix_sort(Stack *stack_a, Stack *stack_b)
 		{
 			head_a = stack_a->head;
 			if (((head_a->data >> i) & 1) == 1)
-				ra(stack_a); // Note: Vous devez adapter cette fonction à votre nouvelle structure de données.
+				ra(stack_a);
 			else
-				pb(stack_a, stack_b); // Note: Vous devez adapter cette fonction à votre nouvelle structure de données.
+				pb(stack_a, stack_b);
 		}
-		while (ft_lstsize2(stack_b) != 0) // Note: Vous devez adapter cette fonction à votre nouvelle structure de données.
-			pa(stack_a, stack_b); // Note: Vous devez adapter cette fonction à votre nouvelle structure de données.
+		while (ft_lstsize2(stack_b) != 0)
+			pa(stack_a, stack_b);
 		i++;
 	}
 }
