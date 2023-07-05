@@ -69,7 +69,7 @@ int main(int argc, char **argv) {
 
     if (test(argc, argv) == 0)
     {
-        ft_printf("ERROR\n");
+        write(1,"ERROR\n", 6);
         exit(EXIT_FAILURE);
     }
     stack_a_init(transform(argc, argv), stack_a, argc);

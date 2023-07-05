@@ -2,7 +2,7 @@
 # define PUSH_SWAP_H
 
 # include "libft.h"
-# include "ft_printf.h"
+# include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <limits.h>
@@ -40,7 +40,7 @@ void sa(Stack *stack);
 void sb(Stack *stack);
 void ss(Stack *stack_A, Stack *stack_B);
 Stack *stack_init();
-
+int test(int argc, char **argv);
 int *transform(int argc, char **argv);
 void fillDataArray(int argc, char **argv, int *data);
 void calculateNewDataArray(int *data, int *data2, int size);

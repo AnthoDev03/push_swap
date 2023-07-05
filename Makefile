@@ -1,9 +1,8 @@
 NAME = push_swap
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
-LFLAGS = -Llibft -lft -Lft_printf -lftprintf
-
+CFLAGS = -Wall -Wextra -Werror
+LFLAGS = -Llibft -lft 
 SRCS = srcs/main.c \
        srcs/utils.c \
        srcs/swap.c \
@@ -21,11 +20,9 @@ HEADER = includes/push_swap.h
 
 LIBFT = libft/libft.a
 
-FT_PRINTF = ft_printf/libftprintf.a
-
 all: $(NAME)
 
-$(NAME): $(OBJS) $(HEADER) $(LIBFT) $(FT_PRINTF)
+$(NAME): $(OBJS) $(HEADER) $(LIBFT) 
 	$(CC) $(CFLAGS) $(OBJS) $(LFLAGS) -o $(NAME)
 
 $(OBJS): %.o: %.c $(HEADER)
@@ -34,18 +31,13 @@ $(OBJS): %.o: %.c $(HEADER)
 $(LIBFT):
 	make -C libft/
 
-$(FT_PRINTF):
-	make -C ft_printf/
-
 clean:
 	rm -f $(OBJS)
 	make -C libft/ clean
-	make -C ft_printf/ clean
 
 fclean: clean
 	rm -f $(NAME)
 	make -C libft/ fclean
-	make -C ft_printf/ fclean
 
 re: fclean all
 
