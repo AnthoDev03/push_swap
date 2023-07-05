@@ -191,7 +191,8 @@ int *transform(int argc, char **argv)
 
     free(data);
 
-    return (decimalToBinary(data2, argc - 1));
+   // return (decimalToBinary(data2, argc - 1));
+    return data2;
 }
 
 
@@ -233,6 +234,91 @@ void sort_5_elements(Stack *stack_a, Stack *stack_b) {
     pa(stack_a, stack_b);
     pa(stack_a, stack_b);
 }
+int ft_lstsize2(Stack *stack)
+{
+    int count = 0;
+    Node *current = stack->head;
+    
+    while (current != NULL) 
+    {
+        count++;
+        current = current->next;
+    }
+    
+    return count;
+}
+
+Node *get_next_min(Stack *stack)
+{
+	Node *current = stack->head;
+	Node *min = NULL;
+
+	// Parcourir tous les noeuds de la pile
+	while (current != NULL)
+	{
+		// Si l'indice est -1 et que soit aucun min n'a encore été trouvé
+		// soit la valeur du noeud courant est plus petite que le min actuel
+		if (current->index == -1 && (min == NULL || current->data < min->data))
+		{
+			// Mettre à jour min
+			min = current;
+		}
+		// Passer au noeud suivant
+		current = current->next;
+	}
+	// Si un min a été trouvé, mettre à jour son index
+	if (min != NULL)
+	{
+		min->index = 0;  // Ou une autre valeur qui signifie que ce noeud a déjà été traité
+	}
+	// Retourner min (peut être NULL si aucun noeud avec index == -1 n'a été trouvé)
+	return min;
+}
+void index_stack(Stack *stack)
+{
+	Node *current;
+	int index = 0;
+
+	// Résoudre le problème en réinitialisant l'indice de tous les noeuds à -1
+	current = stack->head;
+	while (current != NULL)
+	{
+		current->index = -1;
+		current = current->next;
+	}
+
+	// Maintenant, pour chaque valeur minimale non marquée, lui attribuer un indice unique
+	current = stack->head;
+	while (current != NULL)
+	{
+		Node *min = get_next_min(stack);
+		if (min != NULL)
+		{
+			min->index = index++;
+		}
+		current = current->next;
+	}
+}
+
+/*int get_max_bits(Stack *stack)
+{
+	Node	*head;
+	int		max;
+	int		max_bits;
+
+	head = stack->head;
+	max = head->index;
+	max_bits = 0;
+	while (head)
+	{
+		if (head->index > max)
+			max = head->index;
+		head = head->next;
+	}
+	while ((max >> max_bits) != 0)
+		max_bits++;
+	return (max_bits);
+}*/
 static int get_max_bits(Stack *stack)
 {
     Node *head = stack->head;
@@ -251,46 +337,33 @@ static int get_max_bits(Stack *stack)
 
     return max_bits;
 }
-
 void radix_sort(Stack *stack_a, Stack *stack_b)
 {
-    Node *head_a = stack_a->head;
-    int i = 0;
-    int j = 0;
-    int size = 0;
-    int max_bits = 0;
+	Node	*head_a;
+	int		i;
+	int		j;
+	int		size;
+	int		max_bits;
 
-    while (head_a)
-    {
-        size++;
-        head_a = head_a->next;
-    }
-
-    max_bits = get_max_bits(stack_a);
-
-    i = 0;
-    while (i < max_bits)
-    {
-        j = 0;
-        head_a = stack_a->head;
-
-        while (j < size)
-        {
-            head_a = stack_a->head;
-
-            if (((head_a->data >> i) & 1) == 1)
-                ra(stack_a);
-            else
-                pb(stack_a, stack_b);
-
-            j++;
-        }
-
-        while (stack_b->head != NULL)
-            pa(stack_a, stack_b);
-
-        i++;
-    }
+	i = 0;
+	head_a = stack_a->head;
+	size = ft_lstsize2(stack_a); // Note: Vous devez adapter cette fonction à votre nouvelle structure de données.
+	max_bits = get_max_bits(stack_a);
+	while (i < max_bits)
+	{
+		j = 0;
+		while (j++ < size)
+		{
+			head_a = stack_a->head;
+			if (((head_a->data >> i) & 1) == 1)
+				ra(stack_a); // Note: Vous devez adapter cette fonction à votre nouvelle structure de données.
+			else
+				pb(stack_a, stack_b); // Note: Vous devez adapter cette fonction à votre nouvelle structure de données.
+		}
+		while (ft_lstsize2(stack_b) != 0) // Note: Vous devez adapter cette fonction à votre nouvelle structure de données.
+			pa(stack_a, stack_b); // Note: Vous devez adapter cette fonction à votre nouvelle structure de données.
+		i++;
+	}
 }
 int main(int argc, char **argv) {
     Stack *stack_a;
@@ -301,7 +374,7 @@ int main(int argc, char **argv) {
 
     if (test(argc, argv) == 0)
     {
-        ft_printf("ERROR");
+        ft_printf("ERROR\n");
         exit(EXIT_FAILURE);
     }
     stack_a_init(transform(argc, argv), stack_a, argc);
@@ -312,7 +385,8 @@ int main(int argc, char **argv) {
         sort_3_elements(stack_a);
     if (argc == 6)
         sort_5_elements(stack_a, stack_b);
-    else if (argc > 100) {
+    else if (argc > 6) {
+        index_stack(stack_a);
         radix_sort(stack_a, stack_b);
     }
      return (0);
