@@ -1,27 +1,26 @@
 #include "../includes/push_swap.h"
 
-int get_max_bits(Stack *stack)
+int	get_max_bits(Stack *stack)
 {
-    Node *head;
-    int max;
-    int max_bits;
+	Node	*head;
+	int		max;
+	int		max_bits;
 
 	head = stack->head;
 	max = 0;
 	max_bits = 0;
-    while (head)
-    {
-        if (head->data > max)
-            max = head->data;
-        head = head->next;
-    }
-
-    while ((max >> max_bits) != 0)
-        max_bits++;
-
-    return max_bits;
+	while (head)
+	{
+		if (head->data > max)
+			max = head->data;
+		head = head->next;
+	}
+	while ((max >> max_bits) != 0)
+		max_bits++;
+	return (max_bits);
 }
-void radix_sort(Stack *stack_a, Stack *stack_b)
+
+void	radix_sort(Stack *stack_a, Stack *stack_b)
 {
 	Node	*head_a;
 	int		i;

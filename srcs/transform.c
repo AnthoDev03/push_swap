@@ -1,92 +1,89 @@
 #include "../includes/push_swap.h"
 
-void performPushes(Stack *stack_a, Stack *stack_b, int smallest1, int smallest2)
+void	perform_pushes(Stack *stack_a, Stack *stack_b, int smallest1,
+		int smallest2)
 {
-    int count;
-    Node *current;
-    Node *nextNode;
+	int		count;
+	Node	*current;
+	Node	*next_node;
 
-    count = 0;
-    current = stack_a->head;
-
-    while (current != NULL && count < 2)
-    {
-        nextNode = current->next;
-        if (current->data == smallest1 || current->data == smallest2)
-        {
-            pb(stack_a, stack_b);
-            count++;
-        }
-        else
-            ra(stack_a);
-        current = nextNode;
-    }
-}
-void findTwoSmallest(Stack *stack_a, int *smallest1, int *smallest2)
-{
-    int data;
-    *smallest1 = INT_MAX;
-    *smallest2 = INT_MAX;
-    Node *current;
-
-    current = stack_a->head;
-
-    while (current != NULL)
-    {
-        data = current->data;
-        if (data < *smallest1)
-        {
-            *smallest2 = *smallest1;
-            *smallest1 = data;
-        }
-        else if (data < *smallest2 && data != *smallest1)
-            *smallest2 = data;
-        current = current->next;
-    }
-}
-void pushTwoSmallest(Stack *stack_a, Stack *stack_b)
-{
-    int smallest1;
-    int smallest2;
-
-    findTwoSmallest(stack_a, &smallest1, &smallest2);
-    performPushes(stack_a, stack_b, smallest1, smallest2);
+	count = 0;
+	current = stack_a->head;
+	while (current != NULL && count < 2)
+	{
+		next_node = current->next;
+		if (current->data == smallest1 || current->data == smallest2)
+		{
+			pb(stack_a, stack_b);
+			count++;
+		}
+		else
+			ra(stack_a);
+		current = next_node;
+	}
 }
 
-void calculateNewDataArray(int *data, int *data2, int size)
+void	find_two_smallest(Stack *stack_a, int *smallest1, int *smallest2)
 {
-    int idx2;
-    int idx;
-    int newdata;
+	int		data;
+	Node	*current;
 
-    idx2 = 0;
-
-    while (idx2 < size)
-    {
-        idx = 0;
-        newdata = 0;
-
-        while (idx < size)
-        {
-            if (data[idx2] > data[idx])
-                newdata++;
-            idx++;
-        }
-
-        data2[idx2] = newdata;
-        idx2++;
-    }
+	*smallest1 = INT_MAX;
+	*smallest2 = INT_MAX;
+	current = stack_a->head;
+	while (current != NULL)
+	{
+		data = current->data;
+		if (data < *smallest1)
+		{
+			*smallest2 = *smallest1;
+			*smallest1 = data;
+		}
+		else if (data < *smallest2 && data != *smallest1)
+			*smallest2 = data;
+		current = current->next;
+	}
 }
 
-void fillDataArray(int argc, char **argv, int *data)
+void	push_two_smallest(Stack *stack_a, Stack *stack_b)
 {
-    int idx;
+	int	smallest1;
+	int	smallest2;
 
-    idx = 1;
+	find_two_smallest(stack_a, &smallest1, &smallest2);
+	perform_pushes(stack_a, stack_b, smallest1, smallest2);
+}
 
-    while (idx < argc)
-    {
-        data[idx - 1] = ft_atoi(argv[idx]);
-        idx++;
-    }
+void	calculate_new_data_array(int *data, int *data2, int size)
+{
+	int	idx2;
+	int	idx;
+	int	newdata;
+
+	idx2 = 0;
+	while (idx2 < size)
+	{
+		idx = 0;
+		newdata = 0;
+		while (idx < size)
+		{
+			if (data[idx2] > data[idx])
+				newdata++;
+			idx++;
+		}
+		data2[idx2] = newdata;
+		idx2++;
+	}
+}
+
+void	fill_data_array(int argc, char **argv, int *data)
+{
+	int	idx;
+
+	idx = 1;
+	while (idx < argc)
+	{
+		data[idx - 1] = ft_atoi(argv[idx]);
+		idx++;
+	}
 }

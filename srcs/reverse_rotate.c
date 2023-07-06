@@ -1,36 +1,40 @@
 #include "../includes/push_swap.h"
 
-void reverse_rotate(Stack *stack) {
-    Node *last;
-    Node *prev;
-    Node *temp;
+void	reverse_rotate(Stack *stack)
+{
+	Node	*last;
+	Node	*prev;
+	Node	*temp;
 
-    last = NULL;
-    prev = NULL;
-    temp = stack->head;
-    
-    while (temp->next != NULL) {
-        prev = temp;
-        temp = temp->next;
-    }
-    last = temp;
-    prev->next = NULL;
-    last->next = stack->head;
-    stack->head = last;
+	last = NULL;
+	prev = NULL;
+	temp = stack->head;
+	while (temp->next != NULL)
+	{
+		prev = temp;
+		temp = temp->next;
+	}
+	last = temp;
+	prev->next = NULL;
+	last->next = stack->head;
+	stack->head = last;
 }
 
-void rra(Stack *stack_a) {
-    reverse_rotate(stack_a);
-    write(1, "rra\n", 4);
+void	rra(Stack *stack_a)
+{
+	reverse_rotate(stack_a);
+	write(1, "rra\n", 4);
 }
 
-void rrb(Stack *stack_b) {
-    reverse_rotate(stack_b);
-    write(1, "rrb\n", 4);
+void	rrb(Stack *stack_b)
+{
+	reverse_rotate(stack_b);
+	write(1, "rrb\n", 4);
 }
 
-void rrr(Stack *stack_a, Stack *stack_b) {
-    reverse_rotate(stack_a);
-    reverse_rotate(stack_b);
-    write(1, "rrr\n", 4);
+void	rrr(Stack *stack_a, Stack *stack_b)
+{
+	reverse_rotate(stack_a);
+	reverse_rotate(stack_b);
+	write(1, "rrr\n", 4);
 }
