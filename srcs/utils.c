@@ -2,8 +2,10 @@
 
 void push(Stack *stack, int data)
 {
-    Node *new_node = (Node *)malloc(sizeof(Node));
-    if (new_node == NULL)
+    Node *new_node;
+
+    new_node = (Node *)malloc(sizeof(Node));
+    if (!new_node)
         return;
 
     new_node->data = data;
@@ -15,9 +17,10 @@ int pop(Stack *stack)
 {
     if (stack->head == NULL)
         return (0);
-
-    Node *temp = stack->head;
-    int data = temp->data;
+    int data;
+    Node *temp;
+    temp = stack->head;
+    data = temp->data;
     stack->head = stack->head->next;
     free(temp);
 

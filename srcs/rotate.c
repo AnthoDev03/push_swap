@@ -1,15 +1,14 @@
 #include "../includes/push_swap.h"
 
 void rotate(Stack *stack) {
-    if (stack == NULL || stack->head == NULL || stack->head->next == NULL)
-        return;
-    
-    
-    Node *first = stack->head;
-    Node *second = first->next;
+    Node *first;
+    Node *second;
+    Node *temp;
 
+    first = stack->head;
+    second = first->next;
     stack->head = second;
-    Node *temp = second;
+    temp = second;
     while (temp->next != NULL)
         temp = temp->next;
 
@@ -28,8 +27,8 @@ void rb(Stack *stack_b) {
 }
 
 void rr(Stack *stack_a, Stack *stack_b) {
-    ra(stack_a);
-    rb(stack_b);
+    rotate(stack_a);
+    rotate(stack_b);
     write(1, "rr\n", 2);
 }
 

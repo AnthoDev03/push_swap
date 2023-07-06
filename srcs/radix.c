@@ -2,10 +2,13 @@
 
 int get_max_bits(Stack *stack)
 {
-    Node *head = stack->head;
-    int max = 0;
-    int max_bits = 0;
+    Node *head;
+    int max;
+    int max_bits;
 
+	head = stack->head;
+	max = 0;
+	max_bits = 0;
     while (head)
     {
         if (head->data > max)
