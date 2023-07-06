@@ -1,10 +1,10 @@
 #include "../includes/push_swap.h"
 
-void	reverse_rotate(Stack *stack)
+void	reverse_rotate(t_stack *stack)
 {
-	Node	*last;
-	Node	*prev;
-	Node	*temp;
+	t_node	*last;
+	t_node	*prev;
+	t_node	*temp;
 
 	last = NULL;
 	prev = NULL;
@@ -20,19 +20,19 @@ void	reverse_rotate(Stack *stack)
 	stack->head = last;
 }
 
-void	rra(Stack *stack_a)
+void	rra(t_stack *stack_a)
 {
 	reverse_rotate(stack_a);
 	write(1, "rra\n", 4);
 }
 
-void	rrb(Stack *stack_b)
+void	rrb(t_stack *stack_b)
 {
 	reverse_rotate(stack_b);
 	write(1, "rrb\n", 4);
 }
 
-void	rrr(Stack *stack_a, Stack *stack_b)
+void	rrr(t_stack *stack_a, t_stack *stack_b)
 {
 	reverse_rotate(stack_a);
 	reverse_rotate(stack_b);

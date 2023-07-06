@@ -1,6 +1,6 @@
 #include "../includes/push_swap.h"
 
-void	pa(Stack *stack_a, Stack *stack_b)
+void	pa(t_stack *stack_a, t_stack *stack_b)
 {
 	if (stack_b->head != NULL)
 	{
@@ -9,7 +9,7 @@ void	pa(Stack *stack_a, Stack *stack_b)
 	}
 }
 
-void	pb(Stack *stack_a, Stack *stack_b)
+void	pb(t_stack *stack_a, t_stack *stack_b)
 {
 	if (stack_a->head != NULL)
 	{

@@ -1,10 +1,10 @@
 #include "../includes/push_swap.h"
 
-void	push(Stack *stack, int data)
+void	push(t_stack *stack, int data)
 {
-	Node	*new_node;
+	t_node	*new_node;
 
-	new_node = (Node *)malloc(sizeof(Node));
+	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)
 		return ;
 	new_node->data = data;
@@ -12,10 +12,10 @@ void	push(Stack *stack, int data)
 	stack->head = new_node;
 }
 
-int	pop(Stack *stack)
+int	pop(t_stack *stack)
 {
 	int		data;
-	Node	*temp;
+	t_node	*temp;
 
 	if (stack->head == NULL)
 		return (0);
@@ -26,10 +26,10 @@ int	pop(Stack *stack)
 	return (data);
 }
 
-int	ft_lstsize2(Stack *stack)
+int	ft_lstsize2(t_stack *stack)
 {
 	int		count;
-	Node	*current;
+	t_node	*current;
 
 	current = stack->head;
 	count = 0;
@@ -41,9 +41,9 @@ int	ft_lstsize2(Stack *stack)
 	return (count);
 }
 
-bool	issorted(Stack *stack_a)
+bool	issorted(t_stack *stack_a)
 {
-	Node	*current;
+	t_node	*current;
 
 	current = stack_a->head;
 	while (current->next != NULL)

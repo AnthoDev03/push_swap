@@ -1,11 +1,11 @@
 #include "../includes/push_swap.h"
 
-void	perform_pushes(Stack *stack_a, Stack *stack_b, int smallest1,
+void	perform_pushes(t_stack *stack_a, t_stack *stack_b, int smallest1,
 		int smallest2)
 {
 	int		count;
-	Node	*current;
-	Node	*next_node;
+	t_node	*current;
+	t_node	*next_node;
 
 	count = 0;
 	current = stack_a->head;
@@ -23,10 +23,10 @@ void	perform_pushes(Stack *stack_a, Stack *stack_b, int smallest1,
 	}
 }
 
-void	find_two_smallest(Stack *stack_a, int *smallest1, int *smallest2)
+void	find_two_smallest(t_stack *stack_a, int *smallest1, int *smallest2)
 {
 	int		data;
-	Node	*current;
+	t_node	*current;
 
 	*smallest1 = INT_MAX;
 	*smallest2 = INT_MAX;
@@ -45,7 +45,7 @@ void	find_two_smallest(Stack *stack_a, int *smallest1, int *smallest2)
 	}
 }
 
-void	push_two_smallest(Stack *stack_a, Stack *stack_b)
+void	push_two_smallest(t_stack *stack_a, t_stack *stack_b)
 {
 	int	smallest1;
 	int	smallest2;

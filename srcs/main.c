@@ -1,17 +1,17 @@
 #include "../includes/push_swap.h"
 
-Stack	*stack_init(void)
+t_stack	*stack_init(void)
 {
-	Stack	*stack;
+	t_stack	*stack;
 
-	stack = (Stack *)malloc(sizeof(Stack));
+	stack = (t_stack *)malloc(sizeof(t_stack));
 	if (stack == NULL)
 		return (NULL);
 	stack->head = NULL;
 	return (stack);
 }
 
-void	stack_a_init(int *data, Stack *stack_a, int argc)
+void	stack_a_init(int *data, t_stack *stack_a, int argc)
 {
 	int	i;
 
@@ -23,7 +23,7 @@ void	stack_a_init(int *data, Stack *stack_a, int argc)
 	}
 }
 
-void	sort_3_elements(Stack *stack_a)
+void	sort_3_elements(t_stack *stack_a)
 {
 	int	first;
 	int	second;
@@ -50,7 +50,7 @@ void	sort_3_elements(Stack *stack_a)
 		rra(stack_a);
 }
 
-void	sort_5_elements(Stack *stack_a, Stack *stack_b)
+void	sort_5_elements(t_stack *stack_a, t_stack *stack_b)
 {
 	push_two_smallest(stack_a, stack_b);
 	sort_3_elements(stack_a);
@@ -62,8 +62,8 @@ void	sort_5_elements(Stack *stack_a, Stack *stack_b)
 
 int	main(int argc, char **argv)
 {
-	Stack	*stack_a;
-	Stack	*stack_b;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
 
 	stack_a = stack_init();
 	stack_b = stack_init();
