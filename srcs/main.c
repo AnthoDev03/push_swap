@@ -74,16 +74,14 @@ int	main(int argc, char **argv)
 	}
 	stack_a_init(transform(argc, argv), stack_a, argc);
 	if (issorted(stack_a) == true)
-	{
 		exit(EXIT_SUCCESS);
-	}
 	if (argc == 4)
 		sort_3_elements(stack_a);
-	if (argc == 6)
+	else if (argc == 6)
 		sort_5_elements(stack_a, stack_b);
 	else if (argc > 6)
-	{
 		radix_sort(stack_a, stack_b);
-	}
+	free_stack(stack_a);
+	free_stack(stack_b);
 	return (0);
 }

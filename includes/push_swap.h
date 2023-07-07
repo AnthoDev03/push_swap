@@ -11,7 +11,6 @@
 typedef struct t_node
 {
 	int				data;
-	int				index;
 	struct t_node	*next;
 }					t_node;
 
@@ -19,7 +18,7 @@ typedef struct t_stack
 {
 	t_node			*head;
 }					t_stack;
-
+void				free_stack(t_stack *stack);
 void				push(t_stack *stack, int data);
 int					pop(t_stack *stack);
 int					ft_lstsize2(t_stack *stack);
