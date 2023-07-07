@@ -35,7 +35,7 @@ void				reverse_rotate(t_stack *stack);
 void				rra(t_stack *stack_a);
 void				rrb(t_stack *stack_b);
 void				rrr(t_stack *stack_a, t_stack *stack_b);
-
+void				stack_a_init(int *data, t_stack *stack_a, int argc);
 void				swap_first_two(t_stack *stack);
 void				sa(t_stack *stack);
 void				sb(t_stack *stack);

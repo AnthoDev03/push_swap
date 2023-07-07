@@ -1,9 +1,10 @@
 NAME = push_swap
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 LFLAGS = -Llibft -lft 
 SRCS = srcs/main.c \
+       srcs/stack_init.c \
        srcs/utils.c \
        srcs/swap.c \
        srcs/push.c \

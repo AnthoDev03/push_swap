@@ -56,16 +56,17 @@ bool	issorted(t_stack *stack_a)
 	}
 	return (true);
 }
-void free_stack(t_stack *stack)
+void	free_stack(t_stack *stack)
 {
-    t_node *current = stack->head;
-    t_node *temp;
+	t_node	*current;
+	t_node	*temp;
 
-    while (current) {
-        temp = current->next;
-        free(current);
-        current = temp;
-    }
-
-    free(stack);
+	current = stack->head;
+	while (current)
+	{
+		temp = current->next;
+		free(current);
+		current = temp;
+	}
+	free(stack);
 }

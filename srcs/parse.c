@@ -65,28 +65,42 @@ long long	str_to_ll(const char *str)
 	}
 	return (number * sign);
 }
+bool	isoperateur(char **argv)
+{
+	int	i;
+
+	i = 1;
+	while (argv[i])
+	{
+		if (argv[i][0] == '-' || argv[i][0] == '+')
+		{
+			if (!(argv[i][1] >= '0' && argv[i][1] <= '9'))
+			{
+				return (false);
+			}
+		}
+		i++;
+	}
+	return (true);
+}
 
 int	test(int argc, char **argv)
 {
 	int			i;
 	long long	number;
 
-	if (has_duplicates(argc, argv))
-	{
+	if (isoperateur(argv) == false)
 		return (0);
-	}
+	if (has_duplicates(argc, argv))
+		return (0);
 	i = 1;
 	while (i < argc)
 	{
 		if (!is_integer(argv[i]))
-		{
 			return (0);
-		}
 		number = str_to_ll(argv[i]);
 		if (number > INT_MAX || number < INT_MIN)
-		{
 			return (0);
-		}
 		i++;
 	}
 	return (1);
