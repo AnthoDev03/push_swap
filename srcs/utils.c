@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anthrodr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/10 14:35:32 by anthrodr          #+#    #+#             */
+/*   Updated: 2023/07/10 14:35:34 by anthrodr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
 void	push(t_stack *stack, int data)
@@ -56,6 +68,7 @@ bool	issorted(t_stack *stack_a)
 	}
 	return (true);
 }
+
 void	free_stack(t_stack *stack)
 {
 	t_node	*current;

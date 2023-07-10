@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anthrodr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/10 14:34:15 by anthrodr          #+#    #+#             */
+/*   Updated: 2023/07/10 14:34:20 by anthrodr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
 bool	is_integer(const char *str)
@@ -65,6 +77,7 @@ long long	str_to_ll(const char *str)
 	}
 	return (number * sign);
 }
+
 bool	isoperateur(char **argv)
 {
 	int	i;
